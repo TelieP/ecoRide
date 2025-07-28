@@ -13,6 +13,14 @@ class UtilisateurType extends AbstractType
     {
         $builder
             ->add('nom')
+            ->add('prenom')
+            ->add('email')
+            ->add('password')
+            ->add('telephone')
+            ->add('adresse')
+            ->add('date_naissance')
+            ->add('photo')
+            ->add('pseudo')
         ;
     }
 

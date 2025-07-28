@@ -13,6 +13,14 @@ class CovoiturageType extends AbstractType
     {
         $builder
             ->add('lieu_depart')
+            ->add('date_depart')
+            ->add('heure_depart')
+            ->add('date_arrivee')
+            ->add('heure_arrivee')
+            ->add('lieu_arrivee')
+            ->add('statut')
+            ->add('nb_place')
+            ->add('prix_personne')
         ;
     }
 

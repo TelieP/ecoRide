@@ -15,6 +15,38 @@
                 <th>Lieu_depart</th>
                 <td>{{ covoiturage.lieuDepart }}</td>
             </tr>
+            <tr>
+                <th>Date_depart</th>
+                <td>{{ covoiturage.dateDepart ? covoiturage.dateDepart|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Heure_depart</th>
+                <td>{{ covoiturage.heureDepart ? covoiturage.heureDepart|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_arrivee</th>
+                <td>{{ covoiturage.dateArrivee ? covoiturage.dateArrivee|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Heure_arrivee</th>
+                <td>{{ covoiturage.heureArrivee ? covoiturage.heureArrivee|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Lieu_arrivee</th>
+                <td>{{ covoiturage.lieuArrivee }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{{ covoiturage.statut }}</td>
+            </tr>
+            <tr>
+                <th>Nb_place</th>
+                <td>{{ covoiturage.nbPlace }}</td>
+            </tr>
+            <tr>
+                <th>Prix_personne</th>
+                <td>{{ covoiturage.prixPersonne }}</td>
+            </tr>
         </tbody>
     </table>
 

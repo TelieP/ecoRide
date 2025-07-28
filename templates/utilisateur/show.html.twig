@@ -15,6 +15,38 @@
                 <th>Nom</th>
                 <td>{{ utilisateur.nom }}</td>
             </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ utilisateur.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ utilisateur.email }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ utilisateur.password }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ utilisateur.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ utilisateur.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Date_naissance</th>
+                <td>{{ utilisateur.dateNaissance ? utilisateur.dateNaissance|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td>{{ utilisateur.photo }}</td>
+            </tr>
+            <tr>
+                <th>Pseudo</th>
+                <td>{{ utilisateur.pseudo }}</td>
+            </tr>
         </tbody>
     </table>
 
