@@ -17,7 +17,7 @@ class ParticipeType extends AbstractType
         $builder
             ->add('utilisateur', EntityType::class, [
                 'class' => Utilisateur::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
             ])
             ->add('covoiturage', EntityType::class, [
                 'class' => Covoiturage::class,
