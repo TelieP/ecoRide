@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Voiture index</h1>
 
-    <table class="table">
+    <table class="table table-striped m-4 border">
         <thead>
             <tr>
                 <th>Id</th>
@@ -19,7 +19,7 @@
         </thead>
         <tbody>
         {% for voiture in voitures %}
-            <tr>
+            <tr class="border">
                 <td>{{ voiture.id }}</td>
                 <td>{{ voiture.modele }}</td>
                 <td>{{ voiture.immatriculation }}</td>
@@ -38,6 +38,6 @@
         {% endfor %}
         </tbody>
     </table>
-
     <a href="{{ path('app_voiture_new') }}">Create new</a>
+    
 {% endblock %}

@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Utilisateur index</h1>
 
-    <table class="table">
+    <table class="table table-striped m-3 border">
         <thead>
             <tr>
                 <th>Id</th>
@@ -23,7 +23,7 @@
         </thead>
         <tbody>
         {% for utilisateur in utilisateurs %}
-            <tr>
+            <tr class="border">
                 <td>{{ utilisateur.id }}</td>
                 <td>{{ utilisateur.nom }}</td>
                 <td>{{ utilisateur.prenom }}</td>
