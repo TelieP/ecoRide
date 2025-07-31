@@ -40,8 +40,12 @@
   </div>
 </nav>
 
+<ul>
 {% for voiture in voitures %}
-    <div>{{ voiture.modele }}</div>
+    <li>{{ voiture.modele }}</li>
+    <li>{{ voiture.immatriculation }}</li>
+    <li>{{ voiture.energie }}</li>
 {% endfor %}
+</ul>
 
 {% endblock %}
