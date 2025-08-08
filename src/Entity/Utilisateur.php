@@ -55,10 +55,17 @@ class Utilisateur
   #[ORM\ManyToMany(targetEntity: Role::class, inversedBy: 'utilisateurs')]
   private Collection $roles;
 
+  /**
+   * @var Collection<int, Avis>
+   */
+  #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'utilisateur')]
+  private Collection $depose;
+
   public function __construct()
   {
     $this->participations = new ArrayCollection();
     $this->roles = new ArrayCollection();
+    $this->depose = new ArrayCollection();
   }
 
   public function getId(): ?int
@@ -226,5 +233,35 @@ class Utilisateur
     $this->roles->removeElement($role);
 
     return $this;
+  }
+
+  /**
+   * @return Collection<int, Avis>
+   */
+  public function getDepose(): Collection
+  {
+      return $this->depose;
+  }
+
+  public function addDepose(Avis $depose): static
+  {
+      if (!$this->depose->contains($depose)) {
+          $this->depose->add($depose);
+          $depose->setUtilisateur($this);
+      }
+
+      return $this;
+  }
+
+  public function removeDepose(Avis $depose): static
+  {
+      if ($this->depose->removeElement($depose)) {
+          // set the owning side to null (unless already changed)
+          if ($depose->getUtilisateur() === $this) {
+              $depose->setUtilisateur(null);
+          }
+      }
+
+      return $this;
   }
 }
