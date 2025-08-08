@@ -9,17 +9,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MarqueType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
-        $builder
-            ->add('libelle')
-        ;
-    }
+  public function buildForm(FormBuilderInterface $builder, array $options): void
+  {
+    $builder->add('libelle');
+  }
 
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => Marque::class,
-        ]);
-    }
+  public function configureOptions(OptionsResolver $resolver): void
+  {
+    $resolver->setDefaults([
+      'data_class' => Marque::class,
+    ]);
+  }
 }

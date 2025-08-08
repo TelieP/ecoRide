@@ -11,25 +11,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class VoitureType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
-        $builder
-            ->add('modele')
-            ->add('immatriculation')
-            ->add('energie')
-            ->add('couleur')
-            ->add('datePremiereImmatriculation')
-            ->add('marque', EntityType::class, [
-                'class' => Marque::class,
-                'choice_label' => 'id',
-            ])
-        ;
-    }
+  public function buildForm(FormBuilderInterface $builder, array $options): void
+  {
+    $builder
+      ->add('modele')
+      ->add('immatriculation')
+      ->add('energie')
+      ->add('couleur')
+      ->add('datePremiereImmatriculation')
+      ->add('marque', EntityType::class, [
+        'class' => Marque::class,
+        'choice_label' => 'id',
+      ]);
+  }
 
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => Voiture::class,
-        ]);
-    }
+  public function configureOptions(OptionsResolver $resolver): void
+  {
+    $resolver->setDefaults([
+      'data_class' => Voiture::class,
+    ]);
+  }
 }

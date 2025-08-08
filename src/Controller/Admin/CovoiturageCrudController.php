@@ -10,12 +10,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class CovoiturageCrudController extends AbstractCrudController
 {
-    public static function getEntityFqcn(): string
-    {
-        return Covoiturage::class;
-    }
+  public static function getEntityFqcn(): string
+  {
+    return Covoiturage::class;
+  }
 
-    /*
+  /*
     public function configureFields(string $pageName): iterable
     {
         return [

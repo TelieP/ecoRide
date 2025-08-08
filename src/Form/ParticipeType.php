@@ -12,24 +12,23 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ParticipeType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
-        $builder
-            ->add('utilisateur', EntityType::class, [
-                'class' => Utilisateur::class,
-                'choice_label' => 'nom',
-            ])
-            ->add('covoiturage', EntityType::class, [
-                'class' => Covoiturage::class,
-                'choice_label' => 'id',
-            ])
-        ;
-    }
+  public function buildForm(FormBuilderInterface $builder, array $options): void
+  {
+    $builder
+      ->add('utilisateur', EntityType::class, [
+        'class' => Utilisateur::class,
+        'choice_label' => 'nom',
+      ])
+      ->add('covoiturage', EntityType::class, [
+        'class' => Covoiturage::class,
+        'choice_label' => 'id',
+      ]);
+  }
 
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => Participe::class,
-        ]);
-    }
+  public function configureOptions(OptionsResolver $resolver): void
+  {
+    $resolver->setDefaults([
+      'data_class' => Participe::class,
+    ]);
+  }
 }
