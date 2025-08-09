@@ -22,8 +22,8 @@ class Avis
   #[ORM\Column(length: 50, nullable: true)]
   private ?string $statut = null;
 
-  #[ORM\ManyToOne(inversedBy: 'depots')]
-  private ?Utilisateur $depot = null;
+  #[ORM\ManyToOne(inversedBy: 'avis')]
+  private ?Utilisateur $utilisateur = null;
 
   public function getId(): ?int
   {
@@ -66,14 +66,14 @@ class Avis
     return $this;
   }
 
-  public function getDepot(): ?Utilisateur
+  public function getUtilisateur(): ?Utilisateur
   {
-      return $this->depot;
+      return $this->utilisateur;
   }
 
-  public function setDepot(?Utilisateur $depot): static
+  public function setUtilisateur(?Utilisateur $utilisateur): static
   {
-      $this->depot = $depot;
+      $this->utilisateur = $utilisateur;
 
       return $this;
   }

@@ -58,14 +58,14 @@ class Utilisateur
   /**
    * @var Collection<int, Avis>
    */
-  #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'depot')]
-  private Collection $depots;
+  #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'utilisateur')]
+  private Collection $avis;
 
   public function __construct()
   {
     $this->participations = new ArrayCollection();
     $this->roles = new ArrayCollection();
-    $this->depots = new ArrayCollection();
+    $this->avis = new ArrayCollection();
   }
 
   public function getId(): ?int
@@ -238,27 +238,27 @@ class Utilisateur
   /**
    * @return Collection<int, Avis>
    */
-  public function getDepots(): Collection
+  public function getAvis(): Collection
   {
-      return $this->depots;
+      return $this->avis;
   }
 
-  public function addDepot(Avis $depot): static
+  public function addAvi(Avis $avi): static
   {
-      if (!$this->depots->contains($depot)) {
-          $this->depots->add($depot);
-          $depot->setDepot($this);
+      if (!$this->avis->contains($avi)) {
+          $this->avis->add($avi);
+          $avi->setUtilisateur($this);
       }
 
       return $this;
   }
 
-  public function removeDepot(Avis $depot): static
+  public function removeAvi(Avis $avi): static
   {
-      if ($this->depots->removeElement($depot)) {
+      if ($this->avis->removeElement($avi)) {
           // set the owning side to null (unless already changed)
-          if ($depot->getDepot() === $this) {
-              $depot->setDepot(null);
+          if ($avi->getUtilisateur() === $this) {
+              $avi->setUtilisateur(null);
           }
       }
 
