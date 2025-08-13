@@ -8,28 +8,38 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: MarqueRepository::class)]
 class Marque
 {
-  #[ORM\Id]
-  #[ORM\GeneratedValue]
-  #[ORM\Column]
-  private ?int $id = null;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-  #[ORM\Column(length: 255)]
-  private ?string $libelle = null;
+    #[ORM\OneToOne(mappedBy: 'marque', cascade: ['persist', 'remove'])]
+    private ?Voiture $voiture = null;
 
-  public function getId(): ?int
-  {
-    return $this->id;
-  }
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
-  public function getLibelle(): ?string
-  {
-    return $this->libelle;
-  }
+    public function getVoiture(): ?Voiture
+    {
+        return $this->voiture;
+    }
 
-  public function setLibelle(string $libelle): static
-  {
-    $this->libelle = $libelle;
+    public function setVoiture(?Voiture $voiture): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($voiture === null && $this->voiture !== null) {
+            $this->voiture->setMarque(null);
+        }
 
-    return $this;
-  }
+        // set the owning side of the relation if necessary
+        if ($voiture !== null && $voiture->getMarque() !== $this) {
+            $voiture->setMarque($this);
+        }
+
+        $this->voiture = $voiture;
+
+        return $this;
+    }
 }

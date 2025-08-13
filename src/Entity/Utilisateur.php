@@ -5,263 +5,153 @@ namespace App\Entity;
 use App\Repository\UtilisateurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
-class Utilisateur
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
-  #[ORM\Id]
-  #[ORM\GeneratedValue]
-  #[ORM\Column]
-  private ?int $id = null;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-  #[ORM\Column(length: 255)]
-  private ?string $nom = null;
+    #[ORM\Column(length: 180)]
+    private ?string $email = null;
 
-  /**
-   * @var Collection<int, Participe>
-   */
-  #[ORM\OneToMany(targetEntity: Participe::class, mappedBy: 'utilisateur')]
-  private Collection $participations;
+    /**
+     * @var list<string> The user roles
+     */
+    #[ORM\Column]
+    private array $roles = [];
 
-  #[ORM\Column(length: 255)]
-  private ?string $prenom = null;
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
+    private ?string $password = null;
 
-  #[ORM\Column(length: 255)]
-  private ?string $email = null;
+    /**
+     * @var Collection<int, Participe>
+     */
+    #[ORM\OneToMany(targetEntity: Participe::class, mappedBy: 'utilisateur')]
+    private Collection $participations;
 
-  #[ORM\Column(length: 255)]
-  private ?string $password = null;
-
-  #[ORM\Column(length: 255)]
-  private ?string $telephone = null;
-
-  #[ORM\Column(length: 255)]
-  private ?string $adresse = null;
-
-  #[ORM\Column(type: Types::DATE_MUTABLE)]
-  private ?\DateTime $date_naissance = null;
-
-  #[ORM\Column(length: 255, nullable: true)]
-  private ?string $photo = null;
-
-  #[ORM\Column(length: 255)]
-  private ?string $pseudo = null;
-
-  /**
-   * @var Collection<int, Role>
-   */
-  #[ORM\ManyToMany(targetEntity: Role::class, inversedBy: 'utilisateurs')]
-  private Collection $roles;
-
-  /**
-   * @var Collection<int, Avis>
-   */
-  #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'utilisateur')]
-  private Collection $avis;
-
-  public function __construct()
-  {
-    $this->participations = new ArrayCollection();
-    $this->roles = new ArrayCollection();
-    $this->avis = new ArrayCollection();
-  }
-
-  public function getId(): ?int
-  {
-    return $this->id;
-  }
-
-  public function getNom(): ?string
-  {
-    return $this->nom;
-  }
-
-  public function setNom(string $nom): static
-  {
-    $this->nom = $nom;
-
-    return $this;
-  }
-
-  /**
-   * @return Collection<int, Participe>
-   */
-  public function getParticipations(): Collection
-  {
-    return $this->participations;
-  }
-
-  public function addParticipation(Participe $participation): static
-  {
-    if (!$this->participations->contains($participation)) {
-      $this->participations->add($participation);
-      $participation->setUtilisateur($this);
+    public function __construct()
+    {
+        $this->participations = new ArrayCollection();
     }
 
-    return $this;
-  }
-
-  public function removeParticipation(Participe $participation): static
-  {
-    if ($this->participations->removeElement($participation)) {
-      // set the owning side to null (unless already changed)
-      if ($participation->getUtilisateur() === $this) {
-        $participation->setUtilisateur(null);
-      }
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 
-    return $this;
-  }
-
-  public function getPrenom(): ?string
-  {
-    return $this->prenom;
-  }
-
-  public function setPrenom(string $prenom): static
-  {
-    $this->prenom = $prenom;
-
-    return $this;
-  }
-
-  public function getEmail(): ?string
-  {
-    return $this->email;
-  }
-
-  public function setEmail(string $email): static
-  {
-    $this->email = $email;
-
-    return $this;
-  }
-
-  public function getPassword(): ?string
-  {
-    return $this->password;
-  }
-
-  public function setPassword(string $password): static
-  {
-    $this->password = $password;
-
-    return $this;
-  }
-
-  public function getTelephone(): ?string
-  {
-    return $this->telephone;
-  }
-
-  public function setTelephone(string $telephone): static
-  {
-    $this->telephone = $telephone;
-
-    return $this;
-  }
-
-  public function getAdresse(): ?string
-  {
-    return $this->adresse;
-  }
-
-  public function setAdresse(string $adresse): static
-  {
-    $this->adresse = $adresse;
-
-    return $this;
-  }
-
-  public function getDateNaissance(): ?\DateTime
-  {
-    return $this->date_naissance;
-  }
-
-  public function setDateNaissance(\DateTime $date_naissance): static
-  {
-    $this->date_naissance = $date_naissance;
-
-    return $this;
-  }
-
-  public function getPhoto(): ?string
-  {
-    return $this->photo;
-  }
-
-  public function setPhoto(?string $photo): static
-  {
-    $this->photo = $photo;
-
-    return $this;
-  }
-
-  public function getPseudo(): ?string
-  {
-    return $this->pseudo;
-  }
-
-  public function setPseudo(string $pseudo): static
-  {
-    $this->pseudo = $pseudo;
-
-    return $this;
-  }
-
-  /**
-   * @return Collection<int, Role>
-   */
-  public function getRoles(): Collection
-  {
-    return $this->roles;
-  }
-
-  public function addRole(Role $role): static
-  {
-    if (!$this->roles->contains($role)) {
-      $this->roles->add($role);
+    public function getEmail(): ?string
+    {
+        return $this->email;
     }
 
-    return $this;
-  }
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
 
-  public function removeRole(Role $role): static
-  {
-    $this->roles->removeElement($role);
-
-    return $this;
-  }
-
-  /**
-   * @return Collection<int, Avis>
-   */
-  public function getAvis(): Collection
-  {
-    return $this->avis;
-  }
-
-  public function addAvi(Avis $avi): static
-  {
-    if (!$this->avis->contains($avi)) {
-      $this->avis->add($avi);
-      $avi->setUtilisateur($this);
+        return $this;
     }
 
-    return $this;
-  }
-
-  public function removeAvi(Avis $avi): static
-  {
-    if ($this->avis->removeElement($avi)) {
-      // set the owning side to null (unless already changed)
-      if ($avi->getUtilisateur() === $this) {
-        $avi->setUtilisateur(null);
-      }
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
     }
 
-    return $this;
-  }
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    /**
+     * @param list<string> $roles
+     */
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Ensure the session doesn't contain actual password hashes by CRC32C-hashing them, as supported since Symfony 7.3.
+     */
+    public function __serialize(): array
+    {
+        $data = (array) $this;
+        $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
+
+        return $data;
+    }
+
+    #[\Deprecated]
+    public function eraseCredentials(): void
+    {
+        // @deprecated, to be removed when upgrading to Symfony 8
+    }
+
+    /**
+     * @return Collection<int, Participe>
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
+
+    public function addParticipation(Participe $participation): static
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations->add($participation);
+            $participation->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Participe $participation): static
+    {
+        if ($this->participations->removeElement($participation)) {
+            // set the owning side to null (unless already changed)
+            if ($participation->getUtilisateur() === $this) {
+                $participation->setUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
 }
