@@ -39,9 +39,16 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Participe::class, mappedBy: 'utilisateur')]
     private Collection $participations;
 
+    /**
+     * @var Collection<int, Voiture>
+     */
+    #[ORM\ManyToMany(targetEntity: Voiture::class, inversedBy: 'utilisateurs')]
+    private Collection $voiture;
+
     public function __construct()
     {
         $this->participations = new ArrayCollection();
+        $this->voiture = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -151,6 +158,30 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
                 $participation->setUtilisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Voiture>
+     */
+    public function getVoiture(): Collection
+    {
+        return $this->voiture;
+    }
+
+    public function addVoiture(Voiture $voiture): static
+    {
+        if (!$this->voiture->contains($voiture)) {
+            $this->voiture->add($voiture);
+        }
+
+        return $this;
+    }
+
+    public function removeVoiture(Voiture $voiture): static
+    {
+        $this->voiture->removeElement($voiture);
 
         return $this;
     }
