@@ -27,7 +27,7 @@ Le CLI de Symfony : [Symfony CLI](https://symfony.com/download)
 * Se rendre sur [PhpMyAdmin](http://localhost/phpmyadmin/)
 * Cliquer sur le bouton `Importer` dans la barre d'outils.
 * Sélectionner le fichier `ecoride.sql` fourni dans l'archive puis cliquer sur le bouton `Importer` : cela permet de créer la base de données pour le site.
-
+Password admin haché((( $2y$13$61DjB6bfIrIJlclfrrmgpOTlVnQMhaMXyojaf1bTAWH9PIpzLssma  )))
 ### Paramétrage du site
 
 #### Paramétrage de la base de données
