@@ -25,9 +25,16 @@ class Voiture
     #[ORM\ManyToMany(targetEntity: Utilisateur::class, inversedBy: 'voitures')]
     private Collection $utilisateurs;
 
+    /**
+     * @var Collection<int, Covoiturage>
+     */
+    #[ORM\OneToMany(targetEntity: Covoiturage::class, mappedBy: 'voiture', orphanRemoval: true)]
+    private Collection $covoiturages;
+
     public function __construct()
     {
         $this->utilisateurs = new ArrayCollection();
+        $this->covoiturages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,6 +74,36 @@ class Voiture
     public function removeUtilisateur(Utilisateur $utilisateur): static
     {
         $this->utilisateurs->removeElement($utilisateur);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Covoiturage>
+     */
+    public function getCovoiturages(): Collection
+    {
+        return $this->covoiturages;
+    }
+
+    public function addCovoiturage(Covoiturage $covoiturage): static
+    {
+        if (!$this->covoiturages->contains($covoiturage)) {
+            $this->covoiturages->add($covoiturage);
+            $covoiturage->setVoiture($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCovoiturage(Covoiturage $covoiturage): static
+    {
+        if ($this->covoiturages->removeElement($covoiturage)) {
+            // set the owning side to null (unless already changed)
+            if ($covoiturage->getVoiture() === $this) {
+                $covoiturage->setVoiture(null);
+            }
+        }
 
         return $this;
     }
