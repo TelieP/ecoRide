@@ -39,9 +39,23 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Voiture::class, mappedBy: 'utilisateurs')]
     private Collection $voitures;
 
+    /**
+     * @var Collection<int, Avis>
+     */
+    #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'utilisateur', orphanRemoval: true)]
+    private Collection $avis;
+
+    /**
+     * @var Collection<int, Covoiturage>
+     */
+    #[ORM\ManyToMany(targetEntity: Covoiturage::class, inversedBy: 'participants')]
+    private Collection $participations;
+
     public function __construct()
     {
         $this->voitures = new ArrayCollection();
+        $this->avis = new ArrayCollection();
+        $this->participations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -148,6 +162,60 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->voitures->removeElement($voiture)) {
             $voiture->removeUtilisateur($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Avis>
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): static
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis->add($avi);
+            $avi->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): static
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getUtilisateur() === $this) {
+                $avi->setUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Covoiturage>
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
+
+    public function addParticipation(Covoiturage $participation): static
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations->add($participation);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Covoiturage $participation): static
+    {
+        $this->participations->removeElement($participation);
 
         return $this;
     }
