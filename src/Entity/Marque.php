@@ -21,6 +21,9 @@ class Marque
     #[ORM\ManyToMany(targetEntity: Voiture::class)]
     private Collection $voiture;
 
+    #[ORM\Column(length: 255)]
+    private ?string $libelle = null;
+
     public function __construct()
     {
         $this->voiture = new ArrayCollection();
@@ -51,6 +54,18 @@ class Marque
     public function removeVoiture(Voiture $voiture): static
     {
         $this->voiture->removeElement($voiture);
+
+        return $this;
+    }
+
+    public function getLibelle(): ?string
+    {
+        return $this->libelle;
+    }
+
+    public function setLibelle(string $libelle): static
+    {
+        $this->libelle = $libelle;
 
         return $this;
     }
