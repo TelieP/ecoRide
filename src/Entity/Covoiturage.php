@@ -26,7 +26,7 @@ class Covoiturage
     #[ORM\JoinColumn(nullable: false)]
     private ?Voiture $voiture = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTime $date_depart = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
