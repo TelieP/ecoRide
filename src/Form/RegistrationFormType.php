@@ -25,16 +25,16 @@ class RegistrationFormType extends AbstractType
             ->add('date_naissance')
             ->add('photo')
             ->add('pseudo')
-            ->add('voitures', EntityType::class, [
-                'class' => Voiture::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
-            ->add('participations', EntityType::class, [
-                'class' => Covoiturage::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
+            // ->add('voitures', EntityType::class, [
+            //     'class' => Voiture::class,
+            //     'choice_label' => 'id',
+            //     'multiple' => true,
+            // ])
+            // ->add('participations', EntityType::class, [
+            //     'class' => Covoiturage::class,
+            //     'choice_label' => 'id',
+            //     'multiple' => true,
+            // ])
         ;
     }
 
