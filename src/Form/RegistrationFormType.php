@@ -7,6 +7,8 @@ use App\Entity\Utilisateur;
 use App\Entity\Voiture;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,8 +18,16 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles')
-            ->add('password')
+               ->add('roles', ChoiceType::class, [
+            'choices'  => [
+                'Utilisateur' => 'ROLE_USER',
+                'Administrateur' => 'ROLE_ADMIN',
+            ],
+            'multiple' => true,
+            'expanded' => false, // false pour une liste déroulante, true pour des cases à cocher
+            'label' => 'Rôles'
+        ])
+            ->add('password', PasswordType::class)
             ->add('nom')
             ->add('prenom')
             ->add('telephone')

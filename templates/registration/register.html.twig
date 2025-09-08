@@ -3,62 +3,29 @@
 
 
 {% block body %}
-	<style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-	</style>
-
-	<div class="example-wrapper">
-
-
-		<h1>Inscription</h1>
-		<form>
-			<div class="form-group">
-				<label for="nom" name="nom">Nom</label>
-				<input type="text" class="form-control" id="nom" aria-describedby="nom" placeholder="nom">
-			</div>
-			<div class="form-group">
-				<label for="prenom" name="prenom">Prenom</label>
-				<input type="text" class="form-control" id="prenom" aria-describedby="prenom" placeholder="prenom">
-			</div>
-			<div class="form-group">
-				<label for="email" name="email">Email address</label>
-				<input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-			</div>
-			<div class="form-group">
-				<label for="password" name="password">Password</label>
-				<input type="password" class="form-control" id="password" placeholder="Password">
-			</div>
-			<div class="form-group">
-				<label for="telephone" name="telephone">Télephone</label>
-				<input type="number" class="form-control" id="telephone" aria-describedby="telephone" placeholder="telephone">
-			</div>
-			<div class="form-group">
-				<label for="adresse" name="adresse">Adresse</label>
-				<input type="text" class="form-control" id="adresse" aria-describedby="adresse" placeholder="adresse">
-			</div>
-			<div class="form-group">
-				<label for="date" name="date_naissance">Date_naissance</label>
-				<input type="date" class="form-control" id="date_naissance " aria-describedby="date" placeholder="date">
-			</div>
-			<div class="form-group">
-				<label for="photo" name="photo">Photo</label>
-				<input type="text" class="form-control" id="photo" aria-describedby="photo" placeholder="photo">
-			</div>
-			<div class="form-group">
-				<label for="pseudo" name="pseudo">Pseudo</label>
-				<input type="text" class="form-control" id="pseudo" aria-describedby="pseudo" placeholder="pseudo">
-			</div>
-
-			<button type="submit" class="btn btn-primary">S'inscrire</button>
-		</form>
-	</div>
-{% endblock %}
+	{# <style>
+			.example-wrapper {
+				margin: 1em auto;
+				max-width: 800px;
+				width: 95%;
+				font: 18px / 1.5 sans-serif;
+			}
+			.example-wrapper code {
+				background: #F5F5F5;
+				padding: 2px 6px;
+			}
+		</style> #}
+	<h1>Inscription</h1>
+	{{ form_start(registrationForm) }}
+	{{ form_row(registrationForm.nom) }}
+	{{ form_row(registrationForm.prenom) }}
+	{{ form_row(registrationForm.email) }}
+	{{ form_row(registrationForm.password) }}
+	{{ form_row(registrationForm.telephone) }}
+	{{ form_row(registrationForm.adresse) }}
+	{{ form_row(registrationForm.date_naissance) }}
+	{{ form_row(registrationForm.photo) }}
+	{{ form_row(registrationForm.pseudo) }}
+	<button class="btn btn-primary">S'inscrire</button>
+	{{ form_end(registrationForm) }}
+</div>{% endblock %}

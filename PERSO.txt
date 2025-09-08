@@ -1,0 +1,5 @@
+## Création du formulaire d'inscription 
+Utiliser la commande du makerBundle:
+symfony console make:registration-form
+
+puis modifier et adapter le contenu du FormType et du Twig 
