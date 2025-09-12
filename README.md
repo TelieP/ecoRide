@@ -1,5 +1,5 @@
 # ecoRide
-# Projet Garage
+# Projet EcoRide
 
 ## Prérequis
 
