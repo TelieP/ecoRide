@@ -16,13 +16,13 @@ class SearchCovoiturageFormType extends AbstractType
             ->add('lieu_depart', TextType::class,[
                 'required' => false,
                 'label' => 'Ville de départ',
-                'attr' =>['placeholder' => 'Ex: Paris']
+                'attr' =>['placeholder' => 'Ex: Fotouni']
             ])
 
             ->add('lieu_arrivee', TextType::class, [
                 'required' => false,
                 'label' => 'Ville d\arrivée',
-                'attr' => ['placeholder' => 'Ex: Lyon']
+                'attr' => ['placeholder' => 'Ex: Bafang']
             ])
             ->add('date_depart', DateType::class, [
                 'required'=> false,
