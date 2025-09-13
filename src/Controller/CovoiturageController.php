@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Covoiturage;
 use App\Form\CovoiturageType;
+use App\Form\SearchCovoiturageFormType;
 use App\Repository\CovoiturageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,12 +16,28 @@ use Symfony\Component\Routing\Attribute\Route;
 final class CovoiturageController extends AbstractController
 {
     #[Route(name: 'app_covoiturage_index', methods: ['GET'])]
-    public function index(CovoiturageRepository $covoiturageRepository): Response
+    public function index(Request $request , CovoiturageRepository $covoiturageRepository): Response
     {
+        $searchForm = $this->createForm(SearchCovoiturageFormType::class);
+        $searchForm->handleRequest($request);
+
+        //initialisation de la variable $covoiturages
+        $covoiturages = [];
+
+        if ($searchForm->isSubmitted()  &&  $searchForm->isValid()){
+            $data = $searchForm->getData();
+            $covoiturage = $covoiturageRepository->findBySearchCriteria($data);
+        }else{
+            // afficher tous les trajets si le formulaire n'a pas été soumis ou n'est pas valide 
+            $covoiturages = $covoiturageRepository->findAll();
+        }
+
         return $this->render('covoiturage/index.html.twig', [
-            'covoiturages' => $covoiturageRepository->findAll(),
+            'searchForm' => $searchForm->createView(),
+            'covoiturages' => $covoiturages,
         ]);
     }
+
 
     #[Route('/new', name: 'app_covoiturage_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response

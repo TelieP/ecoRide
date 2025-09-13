@@ -1,0 +1,4 @@
+.carousel-item-custom-height img {
+    height: 400px; /* Définissez la hauteur souhaitée */
+    object-fit: cover; /* Important : recadre l'image pour couvrir la zone sans la déformer */
+}

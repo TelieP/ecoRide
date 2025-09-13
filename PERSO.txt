@@ -3,3 +3,15 @@ Utiliser la commande du makerBundle:
 symfony console make:registration-form
 
 puis modifier et adapter le contenu du FormType et du Twig 
+
+
+## Vider le cache SF 
+php bin/console:clear 
+
+## pour cloner un projet GIT 
+git clone " chemin du git du projet"
+
+## Initialisation et configuration projet
+
+- A la création d'un nouveau projet SF , on commence par configurer le fichier .env 
+
