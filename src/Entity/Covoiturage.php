@@ -53,6 +53,12 @@ class Covoiturage
     #[ORM\Column]
     private ?float $prix_personne = null;
 
+//ajout relation avec user qui crée le trajet
+    #[ORM\ManyToOne(inversedBy: 'trajetsProposes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Utilisateur $user = null;
+
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
@@ -209,4 +215,18 @@ class Covoiturage
 
         return $this;
     }
+
+    public function getUser(): ?Utilisateur
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Utilisateur $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+
 }

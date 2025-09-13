@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Espace Personnel
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<h1>Espace Personnel de
+			{{ user.email }}</h1>
+		<hr>
+
+		<h2>Mes trajets proposés</h2>
+		{% if trajets_proposes is not empty %}
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead class="table-dark">
+						<tr>
+							<th>Départ</th>
+							<th>Arrivée</th>
+							<th>Date</th>
+							<th>Prix</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for trajet in trajets_proposes %}
+							<tr>
+								<td>{{ trajet.lieuDepart }}</td>
+								<td>{{ trajet.lieuArrivee }}</td>
+								<td>{{ trajet.dateDepart|date('d/m/Y') }}</td>
+								<td>{{ trajet.prixPersonne }}
+									€</td>
+								<td>
+									<a href="{{ path('app_covoiturage_show', {'id': trajet.id}) }}" class="btn btn-info btn-sm">Voir</a>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		{% else %}
+			<div class="alert alert-info">Vous ne proposez aucun trajet pour le moment.</div>
+		{% endif %}
+
+		<hr>
+
+		<h2>Mes trajets réservés</h2>
+		{# Ajoutez la logique pour afficher les trajets réservés ici #}
+		<div class="alert alert-info">Cette section est en cours de développement.</div>
+
+	</div>
+{% endblock %}

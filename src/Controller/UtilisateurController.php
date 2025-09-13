@@ -18,6 +18,28 @@ final class UtilisateurController extends AbstractController
             'controller_name' => 'UtilisateurController',
         ]);
     }
+
+
+     #[Route('/profil', name: 'app_user_profile')]
+    #[IsGranted('ROLE_USER')]
+    public function profile(CovoiturageRepository $covoiturageRepository): Response
+    {
+        $user = $this->getUser();
+
+        // Si l'utilisateur a une relation "one-to-many" ou une entité de jointure pour les réservations,
+        // vous pouvez accéder aux trajets réservés via cette relation.
+        // Exemple : $trajetsReserves = $user->getReservations();
+
+        // Récupérer les trajets proposés par l'utilisateur
+        $trajetsProposes = $covoiturageRepository->findBy(['user' => $user]);
+
+        return $this->render('user/profile.html.twig', [
+            'user' => $user,
+            'trajets_proposes' => $trajetsProposes,
+            // 'trajets_reserves' => $trajetsReserves, // Décommenter si vous avez cette relation
+        ]);
+    }
+
     // #[Route('/profil', name: 'app_utilisateur_profile')]
     // public function profile(CovoiturageRepository $covoiturageRepository): Response
     // {

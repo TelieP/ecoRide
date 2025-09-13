@@ -75,11 +75,17 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $pseudo = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Covoiturage::class)]
+    private Collection $trajetsProposes;
+
     public function __construct()
     {
         $this->voitures = new ArrayCollection();
         $this->avis = new ArrayCollection();
         $this->participations = new ArrayCollection();
+
+        $this->participations = new ArrayCollection();// Ajout
+        $this->trajetsProposes = new ArrayCollection();//Ajout
     }
 
     public function getId(): ?int
@@ -324,6 +330,37 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPseudo(string $pseudo): static
     {
         $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+
+    /**
+     * @return Collection<int, Covoiturage>
+     */
+    public function getTrajetsProposes(): Collection
+    {
+        return $this->trajetsProposes;
+    }
+
+    public function addTrajetsPropose(Covoiturage $trajetsPropose): static
+    {
+        if (!$this->trajetsProposes->contains($trajetsPropose)) {
+            $this->trajetsProposes->add($trajetsPropose);
+            $trajetsPropose->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTrajetsPropose(Covoiturage $trajetsPropose): static
+    {
+        if ($this->trajetsProposes->removeElement($trajetsPropose)) {
+            // set the owning side to null (unless already changed)
+            if ($trajetsPropose->getUser() === $this) {
+                $trajetsPropose->setUser(null);
+            }
+        }
 
         return $this;
     }
