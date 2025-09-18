@@ -17,7 +17,7 @@
 		}
 	</style>
 	{% include 'navbar.html.twig' %}
-	<div class="container my-5">
+	<div class="container my-5 bg-body rounded">
 		<div class="row">
 			<div class="col-12">
 				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -44,22 +44,44 @@
 			</div>
 		</div>
 	</div>
-	{# <div class="card mb-3" style="max-width: 740px;" border border-primary>
-																								<div class="row g-0">
-																									<div class="col-md-4">
-																										<img src="/images/image04.jpg" class="img-fluid rounded-start" alt="...">
-																									</div>
-																									<div class="col-md-8">
-																										<div class="card-body">
-																											<h5 class="card-title">Card title</h5>
-																											<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-																											<p class="card-text">
-																												<small class="text-body-secondary">Last updated 3 mins ago</small>
-																											</p>
-																										</div>
-																									</div>
-																								</div>
-																							</div> #}
+
+	<div class="row mt-5">
+		<div class="col-sm-6">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Voyagez plus tranquille</h5>
+					<p class="card-text">With supporting text below as a natural lead-in to additional content.
+																																																																																																																																																																																																			With supporting text below as a natural lead-in to additional content.
+																																																																																																																																																																																																			With supporting text below as a natural lead-in to additional content.</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Votre sécurité  au coeur de notre métier</h5>
+					<p class="card-text">With supporting text below as a natural lead-in to additional content.
+																																																																																																																																																																																													With supporting text below as a natural lead-in to additional content.
+																																																																																																																																																																																													With supporting text below as a natural lead-in to additional content.
+					</p>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="card text-bg-dark card mb-3 mt-3 ml-4" style="max-width: 640px;">
+			<img src="{{ asset('images/image04.jpg') }}" class="img-fluid rounded-start" alt="...">
+			<div class="card-img-overlay">
+				<h5 class="card-title">Card title</h5>
+				<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+				<p class="card-text">
+					<small>Last updated 3 mins ago</small>
+				</p>
+			</div>
+		</div>
+	</div>
 
 	{% include 'footer.html.twig' %}
 {% endblock %}
