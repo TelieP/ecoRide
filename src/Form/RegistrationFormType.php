@@ -18,15 +18,15 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email')
-               ->add('roles', ChoiceType::class, [
-            'choices'  => [
-                'Utilisateur' => 'ROLE_USER',
-                'Administrateur' => 'ROLE_ADMIN',
-            ],
-            'multiple' => true,
-            'expanded' => false, // false pour une liste déroulante, true pour des cases à cocher
-            'label' => 'Rôles'
-        ])
+        //        ->add('roles', ChoiceType::class, [
+        //     'choices'  => [
+        //         'Utilisateur' => 'ROLE_USER',
+        //         // 'Administrateur' => 'ROLE_ADMIN',
+        //     ],
+        //     'multiple' => true,
+        //     'expanded' => false, // false pour une liste déroulante, true pour des cases à cocher
+        //     'label' => 'Rôles'
+        // ])
             ->add('password', PasswordType::class)
             ->add('nom')
             ->add('prenom')
