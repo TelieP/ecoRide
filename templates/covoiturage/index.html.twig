@@ -71,5 +71,8 @@
 			<a href="{{ path('app_covoiturage_new') }}" class="btn btn-success">Créer un covoiturage</a>
 		</div>
 	</div>
+	{% block javascripts %}
+		<script src="{{ asset('js/filter.js') }}"></script>
+	{% endblock %}
 	{% include 'footer.html.twig' %}
 {% endblock %}

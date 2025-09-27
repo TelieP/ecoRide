@@ -26,7 +26,6 @@ final class CovoiturageController extends AbstractController
 
         if ($searchForm->isSubmitted()  &&  $searchForm->isValid()){
             $data = $searchForm->getData();
-            $covoiturage = $covoiturageRepository->findBySearchCriteria($data);
         }else{
             // afficher tous les trajets si le formulaire n'a pas été soumis ou n'est pas valide 
             $covoiturages = $covoiturageRepository->findAll();
