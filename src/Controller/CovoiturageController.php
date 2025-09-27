@@ -24,7 +24,6 @@ final class CovoiturageController extends AbstractController
         ]);
     }
 
-
     #[Route('/new', name: 'app_covoiturage_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -44,6 +43,49 @@ final class CovoiturageController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    /**
+     * Gets the filtered cars
+     *
+     * @param Request $request The current request
+     * @param CovoiturageRepository $covoiturageRepository The Covoiturage Repository
+     * @return JsonResponse An array with all covoits ids and filtered covoits ids
+     */
+    // ATTENTION: Cette route doit ABSOLUMENT être placée avant la route '/{id}'
+    // pour éviter que Symfony ne l'interprète comme un ID.
+    #[Route('/getCovoitRecherches', name: 'getCovoitRecherches', methods: ['GET'])]
+    public function getCovoitRecherches(Request $request, CovoiturageRepository $covoitRepository): JsonResponse
+    {
+        // Get filter information
+        $depart = $request->query->get('depart');
+        $arrivee = $request->query->get('arrivee');
+        $date = $request->query->get('date');
+
+        // Get filtered car covoits
+        // J'ai renommé $covoiturageRepository en $covoitRepository dans la signature
+        $repoFielteredCovoits = $covoitRepository->findFilteredCovoits(
+            $depart,
+            $arrivee,
+            $date,
+        );
+        $filteredCovoits = [];
+        foreach ($repoFielteredCovoits as $filteredCovoit) {
+            // Assurez-vous que l'index 'id' est correct si vous n'utilisez pas de DTO
+            array_push($filteredCovoits, $filteredCovoit['id']);
+        }
+
+        // Get all covoits ids
+        $allCovoitIds = [];
+        foreach ($covoitRepository->findAll() as $covoit) {
+            array_push($allCovoitIds, $covoit->getId());
+        }
+
+        return $this->json([
+            'allCovoitIds' => $allCovoitIds,
+            'filteredCovoits' => $filteredCovoits
+        ]);
+    }
+
 
     #[Route('/{id}', name: 'app_covoiturage_show', methods: ['GET'])]
     public function show(Covoiturage $covoiturage): Response
@@ -80,43 +122,5 @@ final class CovoiturageController extends AbstractController
         }
 
         return $this->redirectToRoute('app_covoiturage_index', [], Response::HTTP_SEE_OTHER);
-    }
-
-    /**
-     * Gets the filtered cars
-     *
-     * @param Request $request The current request
-     * @param CovoiturageRepository $covoiturageRepository The Covoiturage Repository
-     * @return JsonResponse An array with all covoits ids and filtered covoits ids
-     */
-    #[Route('/getCovoitRecherches', name: 'getCovoitRecherches', methods: ['GET'])]
-    public function getCovoitRecherches(Request $request, CovoiturageRepository $covoitRepository): JsonResponse
-    {
-        // Get filter information
-        $depart = $request->query->get('depart');
-        $arrivee = $request->query->get('arrivee');
-        $date = $request->query->get('date');
-
-        // Get filtered car covoits
-        $repoFielteredCovoits = $covoitRepository->findFilteredCovoits(
-            $depart,
-            $arrivee,
-            $date,
-        );
-        $filteredCovoits = [];
-        foreach ($repoFielteredCovoits as $filteredCovoit) {
-            array_push($filteredCovoits, $filteredCovoit['id']);
-        }
-
-        // Get all covoits ids
-        $allCovoitIds = [];
-        foreach ($covoitRepository->findAll() as $covoit) {
-            array_push($allCovoitIds, $covoit->getId());
-        }
-
-        return $this->json([
-            'allCovoitIds' => $allCovoitIds,
-            'filteredCovoits' => $filteredCovoits
-        ]);
     }
 }
