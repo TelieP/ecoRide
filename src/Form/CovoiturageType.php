@@ -29,6 +29,7 @@ class CovoiturageType extends AbstractType
                 'choice_label' => 'id',
                 'multiple' => true,
             ])
+            ->add('user_id')
             ->add('voiture', EntityType::class, [
                 'class' => Voiture::class,
                 'choice_label' => 'id',
