@@ -4,13 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Covoiturage;
 use App\Form\CovoiturageType;
-use App\Form\SearchCovoiturageFormType;
 use App\Repository\CovoiturageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/covoiturage')]
 final class CovoiturageController extends AbstractController
@@ -18,21 +18,8 @@ final class CovoiturageController extends AbstractController
     #[Route(name: 'app_covoiturage_index', methods: ['GET'])]
     public function index(Request $request , CovoiturageRepository $covoiturageRepository): Response
     {
-        $searchForm = $this->createForm(SearchCovoiturageFormType::class);
-        $searchForm->handleRequest($request);
-
-        //initialisation de la variable $covoiturages
-        $covoiturages = [];
-
-        if ($searchForm->isSubmitted()  &&  $searchForm->isValid()){
-            $data = $searchForm->getData();
-        }else{
-            // afficher tous les trajets si le formulaire n'a pas été soumis ou n'est pas valide 
-            $covoiturages = $covoiturageRepository->findAll();
-        }
-
+        $covoiturages = $covoiturageRepository->findAll();
         return $this->render('covoiturage/index.html.twig', [
-            'searchForm' => $searchForm->createView(),
             'covoiturages' => $covoiturages,
         ]);
     }
@@ -93,5 +80,43 @@ final class CovoiturageController extends AbstractController
         }
 
         return $this->redirectToRoute('app_covoiturage_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * Gets the filtered cars
+     *
+     * @param Request $request The current request
+     * @param CovoiturageRepository $covoiturageRepository The Covoiturage Repository
+     * @return JsonResponse An array with all covoits ids and filtered covoits ids
+     */
+    #[Route('/getCovoitRecherches', name: 'getCovoitRecherches', methods: ['GET'])]
+    public function getCovoitRecherches(Request $request, CovoiturageRepository $covoitRepository): JsonResponse
+    {
+        // Get filter information
+        $depart = $request->query->get('depart');
+        $arrivee = $request->query->get('arrivee');
+        $date = $request->query->get('date');
+
+        // Get filtered car covoits
+        $repoFielteredCovoits = $covoitRepository->findFilteredCovoits(
+            $depart,
+            $arrivee,
+            $date,
+        );
+        $filteredCovoits = [];
+        foreach ($repoFielteredCovoits as $filteredCovoit) {
+            array_push($filteredCovoits, $filteredCovoit['id']);
+        }
+
+        // Get all covoits ids
+        $allCovoitIds = [];
+        foreach ($covoitRepository->findAll() as $covoit) {
+            array_push($allCovoitIds, $covoit->getId());
+        }
+
+        return $this->json([
+            'allCovoitIds' => $allCovoitIds,
+            'filteredCovoits' => $filteredCovoits
+        ]);
     }
 }
