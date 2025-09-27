@@ -48,7 +48,7 @@ class Covoiturage
     private ?string $statut = null;
 
     #[ORM\Column]
-    private ?float $nb_place = null;
+    private ?int $nb_place = null;
 
     #[ORM\Column]
     private ?float $prix_personne = null;

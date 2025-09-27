@@ -40,9 +40,9 @@ Password admin haché((( $2y$13$61DjB6bfIrIJlclfrrmgpOTlVnQMhaMXyojaf1bTAWH9PIpz
 * Rendez-vous sur la [page d'accueil du site](http://localhost:8000) pour commencer à naviguer.
 
 ## Création d'un administrateur et d'un employé
-* Un administrateur Vincent Parrot est déjà créé avec les identifiants : `parrot.vincent@gmail.com` / `Adminadmin`.
-* Un autre utilisateur, un employé, est également créé avec le rôle `ROLE_EMPLOYE` avec les identifiants : `deroo.nicolas@gmail.com` / `Garagiste`.
-* Pour créer un un employé, se connecter en tant qu'administrateur (avec le rôle `'ROLE-ADMIN`'), rendez-vous sur la [page d'enregistrement](https://localhost:8000/register) ou cliquez sur `Espace réservé` sur le site web.
+* Un administrateur Vincent Parrot est déjà créé avec les identifiants : `paflesix@gmail.com` / `adminadmin`.
+* Un autre utilisateur,est également créé avec le rôle `ROLE_USER` avec les identifiants : `bobolo@yahoo.fr` / `12345678`.
+* Pour créer un utilisateur, se connecter en tant qu'administrateur (avec le rôle `'ROLE-ADMIN`'), rendez-vous sur la [page d'enregistrement](https://localhost:8000/register) ou cliquez sur `Espace réservé` sur le site web.
 
 * Pour créer un admnistrateur "à la main":
   1. Taper la commande `symfony console security:hash-password`.
@@ -54,3 +54,9 @@ Password admin haché((( $2y$13$61DjB6bfIrIJlclfrrmgpOTlVnQMhaMXyojaf1bTAWH9PIpz
 
 ## Site en ligne
 Le site web est disponible en ligne. Vous pourrez vous y rendre [ici](https://garage.deroonicolas.eu/).
+
+## Choix de l'hebergeur et du nom de domaine 
+
+* J'ai choisi d'héberger le site sur lws , car c'est un hebergeur Francais et leurs prix sont relativement bas.
+* L'accès s'effectue via le lien suivant: https://ecoride.fongang.fr/ ( interface sans POO).
+* Lien après déploiement: 
