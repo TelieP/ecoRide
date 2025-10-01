@@ -70,20 +70,10 @@ final class CovoiturageController extends AbstractController
         );
         $filteredCovoits = [];
         foreach ($repoFielteredCovoits as $filteredCovoit) {
-            // Assurez-vous que l'index 'id' est correct si vous n'utilisez pas de DTO
-            array_push($filteredCovoits, $filteredCovoit['id']);
+            array_push($filteredCovoits, $filteredCovoit);
         }
 
-        // Get all covoits ids
-        $allCovoitIds = [];
-        foreach ($covoitRepository->findAll() as $covoit) {
-            array_push($allCovoitIds, $covoit->getId());
-        }
-
-        return $this->json([
-            'allCovoitIds' => $allCovoitIds,
-            'filteredCovoits' => $filteredCovoits
-        ]);
+        return $this->json($filteredCovoits);
     }
 
 

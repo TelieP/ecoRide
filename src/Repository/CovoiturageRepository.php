@@ -19,10 +19,10 @@ class CovoiturageRepository extends ServiceEntityRepository
     public function findFilteredCovoits(
         $depart,
         $arrivee,
-        $date,
+        $date
     ): array {
         $query = $this->createQueryBuilder('c');
-        return $query->select('c.id, c.lieu_depart, c.lieu_arrivee, c.date_arrivee')
+        return $query->select('c.id, c.lieu_depart, c.lieu_arrivee, c.date_arrivee, c.heure_depart, c.nb_place, c.prix_personne')
             ->andWhere('c.lieu_depart = :lieu_depart')
             ->andWhere('c.lieu_arrivee = :lieu_arrivee')
             ->andWhere('c.date_arrivee = :date_arrivee')

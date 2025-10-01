@@ -24,10 +24,6 @@ final class UtilisateurController extends AbstractController
     {
         $user = $this->getUser();
 
-        // Si l'utilisateur a une relation "one-to-many" ou une entité de jointure pour les réservations,
-        // vous pouvez accéder aux trajets réservés via cette relation.
-        // Exemple : $trajetsReserves = $user->getReservations();
-
         // Récupérer les trajets proposés par l'utilisateur
         $trajetsProposes = $covoiturageRepository->findBy(['user' => $user]);
 
