@@ -51,8 +51,7 @@ final class CovoiturageController extends AbstractController
      * @param CovoiturageRepository $covoiturageRepository The Covoiturage Repository
      * @return JsonResponse An array with all covoits ids and filtered covoits ids
      */
-    // ATTENTION: Cette route doit ABSOLUMENT être placée avant la route '/{id}'
-    // pour éviter que Symfony ne l'interprète comme un ID.
+   
     #[Route('/getCovoitRecherches', name: 'getCovoitRecherches', methods: ['GET'])]
     public function getCovoitRecherches(Request $request, CovoiturageRepository $covoitRepository): JsonResponse
     {
@@ -60,6 +59,7 @@ final class CovoiturageController extends AbstractController
         $depart = $request->query->get('depart');
         $arrivee = $request->query->get('arrivee');
         $date = $request->query->get('date');
+        
 
         // Get filtered car covoits
         // J'ai renommé $covoiturageRepository en $covoitRepository dans la signature

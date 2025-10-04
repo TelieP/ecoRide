@@ -1,0 +1,13 @@
+<h1>Nouveau message de contact reçu</h1>
+
+<p>De:
+	{{ contact.name }}
+	({{ contact.email }})</p>
+<p>Sujet:
+	{{ contact.subject }}</p>
+
+<h2>Message:</h2>
+<p>{{ contact.message|nl2br }}</p>
+
+<p>Reçu le:
+	{{ contact.createdAt|date('d/m/Y H:i:s') }}</p>
