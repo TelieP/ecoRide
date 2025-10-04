@@ -4,20 +4,43 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Formulaire de Contact</h1>
+	{% include 'navbar.html.twig' %}
 
-	{% for message in app.flashes('success') %}
-		<div class="alert alert-success">
-			{{ message }}
+	{# Ajout d'un conteneur principal pour centrer #}
+	<div class="container mt-5">
+		<div
+			class="row justify-content-center">
+
+			{# Définit la largeur du formulaire (ex: 6 colonnes sur 12) #}
+			<div class="col-md-6">
+				<h1>Formulaire de Contact</h1>
+
+				{% for message in app.flashes('success') %}
+					<div class="alert alert-success">
+						{{ message }}
+					</div>
+				{% endfor %}
+
+				{{ form_start(form) }}
+				<div class="col-md-12">
+					{{ form_row(form.name) }}
+				</div>
+				<div class="col-md-12">
+					{{ form_row(form.email) }}
+				</div>
+				<div class="col-md-12">
+					{{ form_row(form.subject) }}
+				</div>
+				<div class="col-md-12">
+					{{ form_row(form.message) }}
+				</div>
+
+				<button type="submit" class="btn btn-primary">Envoyer</button>
+				{{ form_end(form) }}
+			</div>
+
 		</div>
-	{% endfor %}
+	</div>
 
-	{{ form_start(form) }}
-	{{ form_row(form.name) }}
-	{{ form_row(form.email) }}
-	{{ form_row(form.subject) }}
-	{{ form_row(form.message) }}
-
-	<button type="submit" class="btn btn-primary">Envoyer</button>
-	{{ form_end(form) }}
+	{% include 'footer.html.twig' %}
 {% endblock %}

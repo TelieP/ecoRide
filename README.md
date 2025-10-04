@@ -35,6 +35,18 @@ Password admin haché((( $2y$13$61DjB6bfIrIJlclfrrmgpOTlVnQMhaMXyojaf1bTAWH9PIpz
 1. Repérer la section `DATABASE_URL` et ajuster vos paramètres
 2. Ma connexion à la base est la suivante : `DATABASE_URL="mysql://root:@127.0.0.1:3306/ecoride?serverVersion=8.0.31&charset=utf8mb4"`
 
+### Configuration d'envoie de mail via le formulaire de contact
+* lorsqu'un utilisateur soumet le formulaire de contact , un mail est envoyé à l'administrateur du site
+## configuration du service avec mailpit
+* configurer le fichier .env comme suit :  MAILER_DSN=smtp://localhost:1025
+* configurer le mail du destinataire ( admin ), en allant dans config/services/ parameters:
+  admin_email: 'paflesix@gmail.com'
+* Télécharger l'exécutable via le lien: (Versions de Mailpit sur GitHub)
+* Renommer le fichier téléchargé en : mailpit.exe 
+* Déplacer le fichier dans le dossier xampp/php
+* Lancer la commande CMD : C:\xampp\php\mailpit.exe . NB il faut laisser cette femetre de terminale ouverte
+* 
+
 ### Accès au site
 * Se placer à la racine du projet et lancer la commande `symfony server:start`.
 * Rendez-vous sur la [page d'accueil du site](http://localhost:8000) pour commencer à naviguer.
