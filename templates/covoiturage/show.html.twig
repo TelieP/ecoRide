@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block body %}
+	{% include 'navbar.html.twig' %}
 	<h1>Covoiturage</h1>
 
 	<table class="table">
@@ -48,17 +49,11 @@
 				<th>Prix personne:</th>
 				<td>{{ covoiturage.prixPersonne }}</td>
 			</tr>
-			{# <tr>
-																<th>Conducteur:</th>
-																<td>{{ covoiturage.user_id }}</td>
-															</tr> #}
 		</tbody>
 	</table>
+	<a href="{{ path('app_covoiturage_edit', {'id': covoiturage.id}) }}" class="btn btn-warning btn-sm">Réserver</a>
 
 	<a href="{{ path('app_covoiturage_index') }}">Retour à la liste</a>
 
-	{# <a href="{{ path('app_covoiturage_edit', {'id': covoiturage.id}) }}">Editer</a> #}
-
-	{# {{ include('covoiturage/_delete_form.html.twig') }} #}
 	{% include 'footer.html.twig' %}
 {% endblock %}

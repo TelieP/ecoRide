@@ -45,7 +45,7 @@ Password admin haché((( $2y$13$61DjB6bfIrIJlclfrrmgpOTlVnQMhaMXyojaf1bTAWH9PIpz
 * Renommer le fichier téléchargé en : mailpit.exe 
 * Déplacer le fichier dans le dossier xampp/php
 * Lancer la commande CMD : C:\xampp\php\mailpit.exe . NB il faut laisser cette femetre de terminale ouverte
-* 
+
 
 ### Accès au site
 * Se placer à la racine du projet et lancer la commande `symfony server:start`.

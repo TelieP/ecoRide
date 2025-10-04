@@ -3,10 +3,17 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-	<h1>Créer un nouveau Covoiturage</h1>
+	{% include 'navbar.html.twig' %}
+	<div class="container my-5 bg-body rounded">
+		<div class="row">
+			<div class="col-12">
+				<h1>Créer un nouveau Covoiturage</h1>
 
-	{{ include('covoiturage/_form.html.twig') }}
+				{{ include('covoiturage/_form.html.twig') }}
 
-	<a href="{{ path('app_covoiturage_index') }}">Retour</a>
+				<a href="{{ path('app_covoiturage_index') }}">Retour</a>
+			</div>
+		</div>
+	</div>
 	{% include 'footer.html.twig' %}
 {% endblock %}

@@ -53,7 +53,31 @@
 								€</td>
 							<td>
 								<a href="{{ path('app_covoiturage_show', {'id': covoiturage.id}) }}" class="btn btn-info btn-sm">Voir</a>
-								<a href="{{ path('app_covoiturage_edit', {'id': covoiturage.id}) }}" class="btn btn-warning btn-sm">Réserver</a>
+
+								{# FORMULAIRE POST POUR LA RÉSERVATION SÉCURISÉE #}
+								{% if app.user %}
+									{# Vérification des conditions #}
+									{% set estDejaInscrit = covoiturage.participants is defined and covoiturage.participants.contains(app.user) %}
+									{% set placesEpuisees = covoiturage.nbPlace <= 0 %}
+									{% set estConducteur = covoiturage.user == app.user %}
+
+									{# J'ai changé le style pour "display:flex" pour que le champ de quantité et le bouton s'alignent #}
+									<form method="POST" action="{{ path('app_covoiturage_reserver', {'id': covoiturage.id}) }}" style="display:flex; align-items:center;">
+
+										<input
+										type="hidden" name="_token" value="{{ csrf_token('reserver' ~ covoiturage.id) }}">
+
+										{# Champ pour choisir la quantité #}
+										<input type="number" name="nombre_places" value="1" min="1" max="{{ covoiturage.nbPlace }}" class="form-control me-2" style="width: 70px;" {% if estConducteur or estDejaInscrit or placesEpuisees %} disabled {% endif %}>
+
+										<button type="submit" class="btn btn-warning btn-sm" {% if estConducteur %} disabled title="Vous êtes le conducteur de ce trajet" {% elseif estDejaInscrit %} disabled title="Vous êtes déjà inscrit" {% elseif placesEpuisees %} disabled title="Ce trajet est complet" {% endif %}>
+											Réserver
+										</button>
+									</form>
+								{% else %}
+									<a href="{{ path('app_login') }}" class="btn btn-warning btn-sm" title="Connectez-vous pour réserver">Réserver</a>
+								{% endif %}
+
 							</td>
 						</tr>
 					{% else %}

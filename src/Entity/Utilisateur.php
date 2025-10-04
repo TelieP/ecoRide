@@ -88,6 +88,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         $this->trajetsProposes = new ArrayCollection();//Ajout
     }
 
+     public function __toString(): string
+    {
+        // Retourne le nom complet de l'utilisateur pour l'affichage dans les listes déroulantes
+        // (ex: "Alain Dupont")
+        if ($this->prenom && $this->nom) {
+            return $this->prenom . ' ' . $this->nom;
+        }
+
+        // Si le nom/prénom n'est pas encore défini (ce qui ne devrait pas arriver ici), utilisez le pseudo ou l'email.
+        return $this->pseudo ?? $this->email ?? ''; 
+    }
+    
     public function getId(): ?int
     {
         return $this->id;

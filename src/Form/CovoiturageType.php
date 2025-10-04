@@ -21,18 +21,18 @@ class CovoiturageType extends AbstractType
             ->add('date_arrivee')
             ->add('heure_arrivee')
             ->add('lieu_arrivee')
-            ->add('statut')
+            // ->add('statut')
             ->add('nb_place')
             ->add('prix_personne')
-            ->add('participants', EntityType::class, [
-                'class' => Utilisateur::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
-            ->add('user_id')
+            // ->add('participants', EntityType::class, [
+            //     'class' => Utilisateur::class,
+            //     'choice_label' => 'id',
+            //     'multiple' => true,
+            // ])
+            // ->add('user')
             ->add('voiture', EntityType::class, [
                 'class' => Voiture::class,
-                'choice_label' => 'id',
+                'choice_label' => 'modele',
             ])
         ;
     }

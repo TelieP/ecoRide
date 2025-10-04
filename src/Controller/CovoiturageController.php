@@ -32,6 +32,10 @@ final class CovoiturageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $user = $this->getUser();
+            $covoiturage->setUser($user); 
+
             $entityManager->persist($covoiturage);
             $entityManager->flush();
 
@@ -84,6 +88,49 @@ final class CovoiturageController extends AbstractController
             'covoiturage' => $covoiturage,
         ]);
     }
+
+    // reservation d'un trajet de covoit 
+
+#[Route('/covoiturage/{id}/reserver', name: 'app_covoiturage_reserver', methods: ['POST'])]
+public function reserver(Covoiturage $covoiturage, EntityManagerInterface $entityManager): Response
+{
+    // 1. Vérification de l'authentification (Sécurité)
+    if (!$this->getUser()) {
+        $this->addFlash('error', 'Vous devez être connecté pour réserver un trajet.');
+        return $this->redirectToRoute('app_login'); // Rediriger vers la connexion
+    }
+    
+    $user = $this->getUser();
+
+    // 2. Vérification de la disponibilité des places
+    $placesDisponibles = $covoiturage->getNbPlace();
+    
+    if ($placesDisponibles <= 0) {
+        $this->addFlash('error', 'Désolé, il n\'y a plus de places disponibles pour ce trajet.');
+        return $this->redirectToRoute('app_covoiturage_index'); 
+    }
+
+    // 3. Vérification que l'utilisateur n'a pas déjà réservé
+    if ($covoiturage->getParticipants()->contains($user)) {
+        $this->addFlash('error', 'Vous avez déjà réservé une place pour ce trajet.');
+        return $this->redirectToRoute('app_covoiturage_index');
+    }
+
+    // 4. Mettre à jour l'entité
+    // A. Ajouter l'utilisateur à la collection de participants
+    $covoiturage->addParticipant($user);
+
+    // B. Décrémenter le nombre de places disponibles
+    $covoiturage->setNbPlace($placesDisponibles - 1);
+
+    // 5. Sauvegarder en base de données
+    $entityManager->flush();
+
+    $this->addFlash('success', 'Réservation effectuée avec succès ! Une place a été déduite.');
+
+    return $this->redirectToRoute('app_covoiturage_index'); 
+} 
+
 
     #[Route('/{id}/edit', name: 'app_covoiturage_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Covoiturage $covoiturage, EntityManagerInterface $entityManager): Response
