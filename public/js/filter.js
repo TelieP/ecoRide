@@ -43,11 +43,7 @@ function getCovoitRecherches(depart, arrivee, date) {
  * @param {array} filteredCovoits 
  */
 function filterCovoit(filteredCovoits) {
-    // Nombre de covoits
-    // FIXME
-    // const covoitNumber = document.getElementById("covoitNumbers")
-    // covoitNumber.textContent = filteredCovoits.length
-   // Modification de la recherche
+   
     const covoituragesElement = document.getElementById("covoiturages")
     covoituragesElement.innerHTML = ""
     filteredCovoits.forEach((covoit) => {

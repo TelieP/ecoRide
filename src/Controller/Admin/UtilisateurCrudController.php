@@ -26,11 +26,6 @@ class UtilisateurCrudController extends AbstractCrudController
             TextField::new('telephone', 'Téléphone'),
             TextField::new('role','Role'),
             TextField::new('email','Email'),
-            // AssociationField::new('covoiturage','Covoiturage'),
-            // AssociationField::new('avis','Avis'),
-            // AssociationField::new('voiture', 'Voiture'),
-
-
             TextEditorField::new('description'),
         ];
     }

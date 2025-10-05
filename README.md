@@ -52,7 +52,8 @@ Password admin haché((( $2y$13$61DjB6bfIrIJlclfrrmgpOTlVnQMhaMXyojaf1bTAWH9PIpz
 * Rendez-vous sur la [page d'accueil du site](http://localhost:8000) pour commencer à naviguer.
 
 ## Création d'un administrateur et d'un employé
-* Un administrateur Vincent Parrot est déjà créé avec les identifiants : `paflesix@gmail.com` / `adminadmin`.
+* Un administrateur  est déjà créé avec les identifiants : `paflesix@gmail.com` / `123456`.
+* Pour acceder au tableau de bord de l'admin, il faut se connecter avec les login admin, puis aller l'adresse: '/admin/utilsateur'
 * Un autre utilisateur,est également créé avec le rôle `ROLE_USER` avec les identifiants : `bobolo@yahoo.fr` / `12345678`.
 * Pour créer un utilisateur, se connecter en tant qu'administrateur (avec le rôle `'ROLE-ADMIN`'), rendez-vous sur la [page d'enregistrement](https://localhost:8000/register) ou cliquez sur `Espace réservé` sur le site web.
 
@@ -65,7 +66,7 @@ Password admin haché((( $2y$13$61DjB6bfIrIJlclfrrmgpOTlVnQMhaMXyojaf1bTAWH9PIpz
 
 
 ## Site en ligne
-Le site web est disponible en ligne. Vous pourrez vous y rendre [ici](https://garage.deroonicolas.eu/).
+Le site web est disponible en ligne. Vous pourrez vous y rendre [ici](https://ecoride2.fongang.fr).
 
 ## Choix de l'hebergeur et du nom de domaine 
 

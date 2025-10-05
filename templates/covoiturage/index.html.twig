@@ -8,7 +8,7 @@
 	<div class="container my-5">
 		<h1 class="mb-4">Trouver un covoiturage</h1>
 
-		{# Le formulaire de recherche de covoiturage #}
+
 		<div class="card p-4 shadow mb-5">
 			<div class="row justify-content-center">
 				<div class="col">
@@ -54,9 +54,9 @@
 							<td>
 								<a href="{{ path('app_covoiturage_show', {'id': covoiturage.id}) }}" class="btn btn-info btn-sm">Voir</a>
 
-								{# FORMULAIRE POST POUR LA RÉSERVATION SÉCURISÉE (1 PLACE PAR DÉFAUT) #}
+
 								{% if app.user %}
-									{# Les vérifications sont déplacées vers le contrôleur. Le bouton est toujours actif ici pour éviter les bugs d'éditeur. #}
+
 									<form method="POST" action="{{ path('app_covoiturage_reserver', {'id': covoiturage.id}) }}" style="display:inline-block;">
 
 										<input type="hidden" name="_token" value="{{ csrf_token('reserver' ~ covoiturage.id) }}">
