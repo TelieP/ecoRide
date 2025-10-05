@@ -90,6 +90,9 @@ final class CovoiturageController extends AbstractController
     }
 
     // reservation d'un trajet de covoit 
+    // src/Controller/CovoiturageController.php
+
+// ...
 
 #[Route('/covoiturage/{id}/reserver', name: 'app_covoiturage_reserver', methods: ['POST'])]
 public function reserver(Covoiturage $covoiturage, EntityManagerInterface $entityManager): Response
@@ -116,8 +119,7 @@ public function reserver(Covoiturage $covoiturage, EntityManagerInterface $entit
         return $this->redirectToRoute('app_covoiturage_index');
     }
 
-    // 4. Mettre à jour l'entité
-    // A. Ajouter l'utilisateur à la collection de participants
+    
     $covoiturage->addParticipant($user);
 
     // B. Décrémenter le nombre de places disponibles

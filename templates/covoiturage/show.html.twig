@@ -1,59 +1,106 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Covoiturage
+{% block title %}Détails du Covoiturage
 {% endblock %}
 
 {% block body %}
 	{% include 'navbar.html.twig' %}
-	<h1>Covoiturage</h1>
+	<div class="container my-5">
+		<h1 class="mb-4 text-primary">Détails du Trajet</h1>
 
-	<table class="table">
-		<tbody>
-			<tr>
-				<th>Id:</th>
-				<td>{{ covoiturage.id }}</td>
-			</tr>
-			<tr>
-				<th>Date_depart:</th>
-				<td>{{ covoiturage.dateDepart ? covoiturage.dateDepart|date('Y-m-d') : '' }}</td>
-			</tr>
-			<tr>
-				<th>Heure_depart:</th>
-				<td>{{ covoiturage.heureDepart ? covoiturage.heureDepart|date('H:i:s') : '' }}</td>
-			</tr>
-			<tr>
-				<th>Lieu_depart:</th>
-				<td>{{ covoiturage.lieuDepart }}</td>
-			</tr>
-			<tr>
-				<th>Date_arrivee:</th>
-				<td>{{ covoiturage.dateArrivee ? covoiturage.dateArrivee|date('Y-m-d') : '' }}</td>
-			</tr>
-			<tr>
-				<th>Heure_arrivee:</th>
-				<td>{{ covoiturage.heureArrivee ? covoiturage.heureArrivee|date('H:i:s') : '' }}</td>
-			</tr>
-			<tr>
-				<th>Lieu_arrivee:</th>
-				<td>{{ covoiturage.lieuArrivee }}</td>
-			</tr>
-			<tr>
-				<th>Statut:</th>
-				<td>{{ covoiturage.statut }}</td>
-			</tr>
-			<tr>
-				<th>Nombre de place:</th>
-				<td>{{ covoiturage.nbPlace }}</td>
-			</tr>
-			<tr>
-				<th>Prix personne:</th>
-				<td>{{ covoiturage.prixPersonne }}</td>
-			</tr>
-		</tbody>
-	</table>
-	<a href="{{ path('app_covoiturage_edit', {'id': covoiturage.id}) }}" class="btn btn-warning btn-sm">Réserver</a>
+		<div class="card shadow p-4 mb-4">
+			<h2 class="card-title text-center mb-4">{{ covoiturage.lieuDepart }}
+				<i class="fas fa-arrow-right mx-2"></i>
+				{{ covoiturage.lieuArrivee }}</h2>
 
-	<a href="{{ path('app_covoiturage_index') }}">Retour à la liste</a>
+			<div class="row">
+				<div class="col-md-6">
+					<h5 class="text-secondary">Informations Clés</h5>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">
+							<strong>Date:</strong>
+							{{ covoiturage.dateDepart ? covoiturage.dateDepart|date('d/m/Y') : 'N/A' }}</li>
+						<li class="list-group-item">
+							<strong>Heure:</strong>
+							{{ covoiturage.heureDepart ? covoiturage.heureDepart|date('H:i') : 'N/A' }}</li>
+						<li class="list-group-item">
+							<strong>Places disponibles:</strong>
+							<span class="badge bg-{{ covoiturage.nbPlace > 0 ? 'success' : 'danger' }}">{{ covoiturage.nbPlace }}</span>
+						</li>
+						<li class="list-group-item">
+							<strong>Prix par personne:</strong>
+							<span class="fw-bold">{{ covoiturage.prixPersonne }}
+								€</span>
+						</li>
+					</ul>
+				</div>
 
+				<div class="col-md-6 mt-4 mt-md-0">
+					<h5 class="text-secondary">Informations sur le Conducteur</h5>
+					<ul
+						class="list-group list-group-flush">
+						{# Assurez-vous que l'entité User a un attribut 'nom' ou 'prenom' pour l'affichage #}
+						<li class="list-group-item">
+							<strong>Nom:</strong>
+							{{ covoiturage.user.prenom|default('N/A') }}
+							{{ covoiturage.user.nom|default('') }}</li>
+						<li class="list-group-item">
+							<strong>Voiture:</strong>
+							{{ covoiturage.voitureModele|default('Non spécifié') }}</li>
+						<li class="list-group-item">
+							<strong>Contact:</strong>
+							<a href="mailto:{{ covoiturage.user.email }}">{{ covoiturage.user.email }}</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			{# {% if covoiturage.description %}
+							<div class="mt-4 border-top pt-3">
+								<h5 class="text-secondary">Détails du Trajet</h5>
+								<p>{{ covoiturage.description|nl2br }}</p>
+							</div>
+						{% endif %} #}
+		</div>
+
+		{# SECTION RÉSERVATION - FORMULAIRE SÉCURISÉ #}
+		<div class="card p-4 shadow mt-5 bg-light">
+			<h3 class="mb-3">Action de Réservation</h3>
+
+			{% if app.user %}
+				{# Détermine les conditions pour la désactivation #}
+				{% set estDejaInscrit = covoiturage.participants is defined and covoiturage.participants.contains(app.user) %}
+				{% set placesEpuisees = covoiturage.nbPlace <= 0 %}
+				{% set estConducteur = covoiturage.user == app.user %}
+				{% set isFormDisabled = estConducteur or estDejaInscrit or placesEpuisees %}
+
+				{% if estConducteur %}
+					<div class="alert alert-info">Vous êtes le conducteur de ce trajet.</div>
+				{% elseif estDejaInscrit %}
+					<div class="alert alert-success">Vous êtes déjà inscrit pour ce trajet !</div>
+				{% elseif placesEpuisees %}
+					<div class="alert alert-danger">Désolé, ce trajet est complet.</div>
+				{% else %}
+					{# Formulaire de confirmation de réservation (une place) #}
+					<form method="POST" action="{{ path('app_covoiturage_reserver_confirm', {'id': covoiturage.id}) }}" onsubmit="return confirm('Confirmez-vous la réservation de 1 place pour ce trajet ?');">
+						<input type="hidden" name="_token" value="{{ csrf_token('reserver' ~ covoiturage.id) }}">
+						<p>Le fait de cliquer sur "Confirmer la Réservation" finalisera votre place.</p>
+						<button type="submit" class="btn btn-warning btn-lg w-100">
+							Confirmer la Réservation (1 place -
+							{{ covoiturage.prixPersonne }}
+							€)
+						</button>
+					</form>
+				{% endif %}
+			{% else %}
+				<div class="alert alert-warning text-center">
+					<a href="{{ path('app_login') }}" class="btn btn-warning btn-lg">Connectez-vous</a>
+					pour pouvoir réserver votre place.
+				</div>
+			{% endif %}
+
+			<a href="{{ path('app_covoiturage_index') }}" class="btn btn-outline-secondary mt-3">Retour à la liste</a>
+		</div>
+	</div>
 	{% include 'footer.html.twig' %}
 {% endblock %}
