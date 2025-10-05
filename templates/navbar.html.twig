@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-success">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="{{ path('app_utilisateur') }}">EcoRide</a>
+		<a class="navbar-brand text-white" href="{{ path('app_utilisateur') }}">EcoRide</a>
 		<img src="{{ asset('images/ECORIDE.svg') }}" alt="Logo EcoRide" class="img-fluid" style="max-height: 80px;">
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -8,24 +8,24 @@
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav ms-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="{{ path('app_utilisateur') }}">Accueil</a>
+					<a class="nav-link text-white" href="{{ path('app_utilisateur') }}">Accueil</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="{{ path('app_covoiturage_index') }}">Covoiturages</a>
+					<a class="nav-link text-white" href="{{ path('app_covoiturage_index') }}">Covoiturages</a>
 				</li>
 				{% if app.user %}
 					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_user_profile') }}">Mon Profil</a>
+						<a class="nav-link text-white" href="{{ path('app_user_profile') }}">Mon Profil</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+						<a class="nav-link text-white" href="{{ path('app_logout') }}">Déconnexion</a>
 					</li>
 				{% else %}
 					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+						<a class="nav-link text-white" href="{{ path('app_login') }}">Connexion</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+						<a class="nav-link text-white" href="{{ path('app_register') }}">Inscription</a>
 					</li>
 				{% endif %}
 			</ul>
