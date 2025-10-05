@@ -1,20 +1,94 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PolitiqueController!{% endblock %}
+{% block title %}Hello PolitiqueController!
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	{% include 'navbar.html.twig' %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	<div class="container my-5 justify-content-center">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/xampp/htdocs/ecoRide/src/Controller/PolitiqueController.php</code></li>
-        <li>Your template at <code>C:/xampp/htdocs/ecoRide/templates/politique/index.html.twig</code></li>
-    </ul>
-</div>
-{% endblock %}
+		<div class="example-wrapper">
+			<h1>Conditions générales</h1>
+			<p>
+				EcoRide est une plateforme de covoiturage dédiée à la mise en relation de conducteurs et de passagers souhaitant partager un trajet.
+																					En utilisant notre service, vous acceptez les conditions générales suivantes :<br>
+
+				1. Acceptation des conditions
+																				 En utilisant notre plateforme, vous déclarez avoir lu et accepté les présentes conditions générales.<br>
+
+				2. Inscription
+																				Pour utiliser notre service, vous devez créer un compte en fournissant des informations exactes et à jour.Une autre condition est celle de l'age : 18 ans ou plus .
+				<br>
+				3. Obligations des utilisateurs
+																				Vous vous engagez à utiliser notre service de manière responsable et à respecter les droits des autres utilisateurs.<br>
+
+				4. Limitation de responsabilité
+																				EcoRide ne pourra être tenu responsable des dommages directs ou indirects résultant de l'utilisation de notre service.<br>
+
+				5. Modifications des conditions
+																				Nous nous réservons le droit de modifier ces conditions à tout moment. Les utilisateurs seront informés des changements.<br>
+
+				6. Droit applicable
+																				 Les présentes conditions sont régies par le droit en vigueur dans le pays où EcoRide est établi.<br>
+
+			</p>
+
+			<p>
+				7. Vérification
+															Ecoride peut, à des fins de transparence, d’amélioration de la confiance, ou de prévention ou détection des fraudes,
+															 mettre en place un système de vérification de certaines des informations que vous fournissez sur votre profil. 
+																C’est notamment le cas lorsque vous renseignez votre numéro de téléphone ou nous fournissez une pièce d’identité.
+															
+															Vous reconnaissez et acceptez que toute référence sur la Plateforme ou les Services à des informations dites « vérifiées » ou tout terme similaire, signifie uniquement qu’un Membre 
+															a réussi avec succès la procédure de vérification existante sur la Plateforme ou les Services afin de vous fournir davantage d’informations sur 
+															le Membre avec lequel vous envisagez de voyager. EcoRide ne garantit ni la véracité, ni la fiabilité, ni la validité de l’information ayant 
+															fait l’objet de la procédure de vérification.
+
+
+			</p>
+		</div>
+
+		<div class="container my-5 justify-content-center">
+
+			<div class="example-wrapper">
+				<div>
+					<h2>Utilisation des services</h2>
+					<p>
+						<h3>
+							Publication des Annonces de Covoiturage</h3>
+						En tant que Membre, et sous réserve que vous remplissiez les conditions ci-dessous, vous pouvez créer et publier des Annonces de Covoiturage sur la Plateforme en indiquant des informations quant au Trajet en Covoiturage que vous comptez effectuer (dates/heures et lieux de départ et d’arrivée, nombre de places offertes, options proposées, montant de la Participation aux Frais, etc.).
+												 Lors de la publication de votre Annonce de Covoiturage, vous pouvez indiquer des villes étapes, dans lesquelles vous acceptez de vous arrêter pour prendre ou déposer des Passagers. Les tronçons du Trajet en Covoiturage entre ces villes étapes ou entre l’une de ces villes étapes et le point de départ ou d’arrivée du Trajet en Covoiturage constituent des « Sous-Trajets ».
+												 Vous n’êtes autorisé à publier une Annonce de Covoiturage que si vous remplissez l’ensemble des conditions suivantes :
+												 (i) vous êtes titulaire d’un permis de conduire valide ;
+												 (ii) vous ne proposez des Annonces de Covoiturage que pour des véhicules dont vous êtes le propriétaire ou que vous utilisez avec l’autorisation expresse du propriétaire, et dans tous les cas, que vous êtes autorisé à utiliser à des fins de covoiturage ;
+												 (iii) vous êtes et demeurez le conducteur principal du véhicule, objet de l’Annonce de Covoiturage ;
+												 (iv) le véhicule bénéficie d’une assurance au tiers valide ;
+												 (v) vous n’avez aucune contre-indication ou incapacité médicale à conduire ;
+												 (vi) le véhicule que vous comptez utiliser pour le Trajet est une voiture de tourisme à 4 roues, disposant d’un maximum de 7 places assises, à l’exclusion des voitures dites « sans permis » ;
+												 (vii) vous ne comptez pas publier une autre annonce pour le même Trajet en Covoiturage sur la Plateforme ;
+												 (viii) vous n’offrez pas plus de Places que celles disponibles dans votre véhicule ;
+												 (ix) toutes les Places offertes ont une ceinture de sécurité, et ce même si le véhicule est homologué en présence de sièges dépourvus de ceinture de sécurité ;
+												 (x) vous utilisez un véhicule en parfait état de fonctionnement et conforme aux usages et dispositions légales applicables, notamment avec un contrôle technique à jour ;
+												 (xi) vous êtes un consommateur et n’agissez pas à titre professionnel.
+												 Vous reconnaissez être le seul responsable du contenu de l’Annonce de Covoiturage que vous publiez sur la Plateforme. En conséquence, vous déclarez et garantissez l’exactitude et la véracité de toute information contenue dans votre Annonce de Covoiturage et vous engagez à effectuer le Trajet en Covoiturage selon les modalités décrites dans votre Annonce de Covoiturage.
+												 Votre Annonce de Covoiturage sera publiée sur la Plateforme et donc visible des Membres et de tous visiteurs, même non-Membre, effectuant une recherche sur la Plateforme ou sur le site internet des partenaires de EcoRide. EcoRide se réserve la possibilité, à sa seule discrétion, de ne pas publier ou retirer, à tout moment, toute Annonce de Covoiturage qui ne serait pas conforme aux CGU ou qu’elle considérerait comme préjudiciable à son image, celle de la Plateforme ou celle des Services, et/ou suspendre le compte du Membre qui publie ces Annonces de Covoiturage conformément à l’Article 9 des présentes CGU.
+												 Vous êtes également informé de ce que dans le cas où vous vous présenteriez en tant que consommateur en utilisant la Plateforme alors que vous agissez en réalité à titre professionnel vous vous exposez aux sanctions prévues à l’article L.132-2 du Code de la consommation.
+					</p>
+				</div>
+
+			</div>
+			{% include 'footer.html.twig' %}
+		{% endblock %}
