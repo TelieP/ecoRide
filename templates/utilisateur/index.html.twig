@@ -55,7 +55,10 @@
 				</div>
 			</div>
 			<div class="text-center mt-4">
-				<button class="btn btn-primary btn-lg" id="recherche1">Rechercher</button>
+				<a href="{{ path('app_covoiturage_index') }}" class="btn btn-primary btn-lg" role="button">
+					Rechercher
+				</a>
+
 			</div>
 
 		</div>
@@ -84,8 +87,8 @@
 
 									<p class="card-text">
 										Chaque semaine, chaque mois. Pour une réunion importante ou juste parce que vous avez envie de voir un nouvel endroit. 
-																																								Avec une grande famille. Ou un gros bagage. Vers la mer comme vers les pistes de ski.
-																																								Peu importe votre voyage, il sera toujours simple et abordable avec nous. Avec un texte de soutien ci-dessous comme une introduction naturelle à un contenu supplémentaire.
+																																																																																																																																																																																																																												Avec une grande famille. Ou un gros bagage. Vers la mer comme vers les pistes de ski.
+																																																																																																																																																																																																																												Peu importe votre voyage, il sera toujours simple et abordable avec nous. Avec un texte de soutien ci-dessous comme une introduction naturelle à un contenu supplémentaire.
 									</p>
 
 								</div>
@@ -103,10 +106,43 @@
 						<h1 class="fw-light">Voyagez en toute confiance</h1>
 						<p class="lead text-muted">
 							Nous prenons le temps qu'il faut pour connaitre nos membres et nous vérifions les avis 
-																																																																																																																																																																																								, les profils et l'identité de chacun. Vous savez donc avec qui vous allez voyager pour réserver en toute confiance sur une 
-																																																																																																																																																																																										plateforme sécurisée.
+																																																																																																																																																																																																																																																																																																																						, les profils et l'identité de chacun. Vous savez donc avec qui vous allez voyager pour réserver en toute confiance sur une 
+																																																																																																																																																																																																																																																																																																																	plateforme sécurisée.
 						</p>
 					</div>
 				</div>
+				<div class="container my-5 bg-body rounded">
+					<div class="row">
+						<div class="col-12">
+							<div class="row mt-5">
+								<div class="col-sm-6">
+									<div class="card border-success">
+										<div class="card-body">
+											<i class="bi bi-piggy-bank-fill" style="font-size: 70px;"></i>
+											<h5 class="card-title">Voyagez plus tranquille</h5>
+											<p class="card-text">
+												Ou que vous alliez, nous vous aidons à trouver le trajet qui vous convient parmi notre large choix de destinations à petits prix.
+											</p>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="card border-success">
+										<div class="card-body">
+											<i class="bi bi-bus-front" style="font-size: 70px;"></i>
+											<h5 class="card-title">Découvrez de nouvelles villes sans vous ruiner</h5>
+											<p class="card-text">
+												Ou que vous alliez, nous vous aidons à trouver le trajet qui vous convient parmi notre large choix de destinations à petits prix.
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
 				{% include 'footer.html.twig' %}
 			{% endblock %}
