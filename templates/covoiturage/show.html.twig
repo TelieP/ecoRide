@@ -37,9 +37,8 @@
 
 				<div class="col-md-6 mt-4 mt-md-0">
 					<h5 class="text-secondary">Informations sur le Conducteur</h5>
-					<ul
-						class="list-group list-group-flush">
-						{# Assurez-vous que l'entité User a un attribut 'nom' ou 'prenom' pour l'affichage #}
+					<ul class="list-group list-group-flush">
+
 						<li class="list-group-item">
 							<strong>Nom:</strong>
 							{{ covoiturage.user.prenom|default('N/A') }}
@@ -55,20 +54,14 @@
 				</div>
 			</div>
 
-			{# {% if covoiturage.description %}
-							<div class="mt-4 border-top pt-3">
-								<h5 class="text-secondary">Détails du Trajet</h5>
-								<p>{{ covoiturage.description|nl2br }}</p>
-							</div>
-						{% endif %} #}
 		</div>
 
-		{# SECTION RÉSERVATION - FORMULAIRE SÉCURISÉ #}
+
 		<div class="card p-4 shadow mt-5 bg-light">
 			<h3 class="mb-3">Action de Réservation</h3>
 
 			{% if app.user %}
-				{# Détermine les conditions pour la désactivation #}
+
 				{% set estDejaInscrit = covoiturage.participants is defined and covoiturage.participants.contains(app.user) %}
 				{% set placesEpuisees = covoiturage.nbPlace <= 0 %}
 				{% set estConducteur = covoiturage.user == app.user %}
@@ -81,10 +74,11 @@
 				{% elseif placesEpuisees %}
 					<div class="alert alert-danger">Désolé, ce trajet est complet.</div>
 				{% else %}
-					{# Formulaire de confirmation de réservation (une place) #}
-					<form method="POST" action="{{ path('app_covoiturage_reserver_confirm', {'id': covoiturage.id}) }}" onsubmit="return confirm('Confirmez-vous la réservation de 1 place pour ce trajet ?');">
+
+					<form method="POST" action="{{ path('app_covoiturage_show', {'id': covoiturage.id}) }}" onsubmit="return confirm('Confirmez-vous la réservation de 1 place pour ce trajet ?');">
 						<input type="hidden" name="_token" value="{{ csrf_token('reserver' ~ covoiturage.id) }}">
-						<p>Le fait de cliquer sur "Confirmer la Réservation" finalisera votre place.</p>
+						<p>
+							" Réserver"votre place.</p>
 						<button type="submit" class="btn btn-warning btn-lg w-100">
 							Confirmer la Réservation (1 place -
 							{{ covoiturage.prixPersonne }}
